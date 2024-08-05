@@ -17,6 +17,12 @@
         placeholder="Enter quote category"
       />
       <input id="newQuoteAuthor" type="text" placeholder="Enter author name" />
+      <input
+        type="file"
+        id="importFile"
+        accept=".json"
+        onchange="importFromJsonFile(event)"
+      />
       <button onclick="createAddQuoteForm()">Add Quote</button>
     </div>
     <script src="script.js"></script>
