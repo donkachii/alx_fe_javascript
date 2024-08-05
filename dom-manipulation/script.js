@@ -71,12 +71,12 @@ function showRandomQuote() {
 function createAddQuoteForm() {
   const newQuoteText = document.getElementById("newQuoteText").value;
   const newQuoteCategory = document.getElementById("newQuoteCategory").value;
-  const quoteDisplay = document.getElementById("quoteDisplay");
 
   if (newQuoteText && newQuoteCategory) {
     const newQuote = { text: newQuoteText, category: newQuoteCategory };
     quotes.push(newQuote);
     saveQuotes(); // Save the updated quotes to local storage
+    updateCategoryFilter();
 
     document.getElementById("newQuoteText").value = "";
     document.getElementById("newQuoteCategory").value = "";
