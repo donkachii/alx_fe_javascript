@@ -76,7 +76,7 @@ function createAddQuoteForm() {
     const newQuote = { text: newQuoteText, category: newQuoteCategory };
     quotes.push(newQuote);
     saveQuotes(); // Save the updated quotes to local storage
-    updateCategoryFilter();
+    populateCategories();
 
     document.getElementById("newQuoteText").value = "";
     document.getElementById("newQuoteCategory").value = "";
@@ -109,7 +109,7 @@ function exportToJsonFile() {
   document.body.removeChild(a);
 }
 
-function updateCategoryFilter() {
+function populateCategories() {
   const categoryFilter = document.getElementById("categoryFilter");
   const categories = [...new Set(quotes.map((q) => q.category))];
 
@@ -152,5 +152,5 @@ document.getElementById("newQuote").addEventListener("click", showRandomQuote);
 
 // Initial display of a random quote
 showRandomQuote();
-updateCategoryFilter();
+populateCategories();
 filterQuotes();
