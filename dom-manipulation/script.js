@@ -110,26 +110,26 @@ function exportToJsonFile() {
 }
 
 function populateCategories() {
-  const categoryFilter = document.getElementById("categoryFilter");
+  const selectedCategory = document.getElementById("categoryFilter");
   const categories = [...new Set(quotes.map((q) => q.category))];
 
-  categoryFilter.innerHTML = '<option value="all">All Categories</option>';
+  selectedCategory.innerHTML = '<option value="all">All Categories</option>';
   categories.forEach((category) => {
     const option = document.createElement("option");
     option.value = category;
     option.textContent = category;
-    categoryFilter.appendChild(option);
+    selectedCategory.appendChild(option);
   });
 
-  categoryFilter.value = lastSelectedCategory;
+  selectedCategory.value = lastSelectedCategory;
 }
 
 function filterQuotesArray() {
-  const categoryFilter = document.getElementById("categoryFilter").value;
-  if (categoryFilter === "all") {
+  const selectedCategory = document.getElementById("categoryFilter").value;
+  if (selectedCategory === "all") {
     return quotes;
   } else {
-    return quotes.filter((quote) => quote.category === categoryFilter);
+    return quotes.filter((quote) => quote.category === selectedCategory);
   }
 }
 
