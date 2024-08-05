@@ -59,18 +59,25 @@ function showRandomQuote() {
   const quoteDisplay = document.getElementById("quoteDisplay");
   const randomIndex = Math.floor(Math.random() * quotes.length);
   const randomQuote = quotes[randomIndex];
-  quoteDisplay.innerHTML = `<p>${randomQuote.text}</p><p><em>Category: ${randomQuote.category}</em></p>`;
+  const quoteElement = document.createElement("div");
+  quoteElement.innerHTML = `
+           <p>${randomQuote.text}</p><p><em>Category: ${randomQuote.category}</em></p>
+        `;
+  quoteDisplay.appendChild(quoteElement);
+  //   quoteDisplay.innerHTML = `<p>${randomQuote.text}</p><p><em>Category: ${randomQuote.category}</em></p>`;
 }
 
 // to add a new quote
 function createAddQuoteForm() {
   const newQuoteText = document.getElementById("newQuoteText").value;
   const newQuoteCategory = document.getElementById("newQuoteCategory").value;
+  const quoteDisplay = document.getElementById("quoteDisplay");
 
   if (newQuoteText && newQuoteCategory) {
     const newQuote = { text: newQuoteText, category: newQuoteCategory };
     quotes.push(newQuote);
     saveQuotes(); // Save the updated quotes to local storage
+
     document.getElementById("newQuoteText").value = "";
     document.getElementById("newQuoteCategory").value = "";
     alert("New quote added successfully!");
