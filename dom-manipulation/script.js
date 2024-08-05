@@ -109,8 +109,48 @@ function exportToJsonFile() {
   document.body.removeChild(a);
 }
 
+function updateCategoryFilter() {
+  const categoryFilter = document.getElementById("categoryFilter");
+  const categories = [...new Set(quotes.map((q) => q.category))];
+
+  categoryFilter.innerHTML = '<option value="all">All Categories</option>';
+  categories.forEach((category) => {
+    const option = document.createElement("option");
+    option.value = category;
+    option.textContent = category;
+    categoryFilter.appendChild(option);
+  });
+
+  categoryFilter.value = lastSelectedCategory;
+}
+
+function filterQuotesArray() {
+  const categoryFilter = document.getElementById("categoryFilter").value;
+  if (categoryFilter === "all") {
+    return quotes;
+  } else {
+    return quotes.filter((quote) => quote.category === categoryFilter);
+  }
+}
+
+function filterQuotes() {
+  localStorage.setItem(
+    "lastSelectedCategory",
+    document.getElementById("categoryFilter").value
+  );
+  const filteredQuotes = filterQuotesArray();
+  if (filteredQuotes.length > 0) {
+    displayQuote(filteredQuotes[0]);
+  } else {
+    document.getElementById("quoteDisplay").innerHTML =
+      "<p>No quotes available in this category.</p>";
+  }
+}
+
 // Event listener for showing a new quote
 document.getElementById("newQuote").addEventListener("click", showRandomQuote);
 
 // Initial display of a random quote
 showRandomQuote();
+updateCategoryFilter();
+filterQuotes();
