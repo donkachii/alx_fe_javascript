@@ -83,7 +83,7 @@ function mergeQuotes(localQuotes, serverQuotes) {
   return mergedQuotes;
 }
 
-async function postQuoteToServer(quote) {
+async function syncQuotes(quote) {
   try {
     const response = await fetch(serverUrl, {
       method: "POST",
@@ -127,7 +127,7 @@ function createAddQuoteForm() {
     quotes.push(newQuote);
     saveQuotes();
     updateCategoryFilter();
-    postQuoteToServer(newQuote);
+    syncQuotes(newQuote);
 
     document.getElementById("newQuoteText").value = "";
     document.getElementById("newQuoteCategory").value = "";
